@@ -8,11 +8,11 @@ import { THIRD_PLACE_LOOKUP } from "../data/thirdPlaceLookup.js";
 import {
   getDependentMatches,
   resolveParticipant,
-} from "../utils/bracketUtils.js";
-import { shareBracketImage } from "../utils/shareBracketImage.js";
-import BracketArena from "../components/bracket/BracketArena.jsx";
-import MobileBracketFlow from "../components/bracket/MobileBracketFlow.jsx";
-import BracketSharePanel from "../components/bracket/BracketSharePanel.jsx";
+} from "../Utils/bracketUtils.js";
+import { shareBracketImage } from "../Utils/shareBracketImage.js";
+import BracketArena from "../Components/bracket/BracketArena.jsx";
+import MobileBracketFlow from "../Components/bracket/MobileBracketFlow.jsx";
+import BracketSharePanel from "../Components/bracket/BracketSharePanel.jsx";
 
 function BracketPage({
   standings,

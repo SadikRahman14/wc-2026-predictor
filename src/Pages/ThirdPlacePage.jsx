@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { groups } from "../data/groups.js";
-import TeamFlag from "../components/common/TeamFlag.jsx";
+import TeamFlag from "../Components/common/TeamFlag.jsx";
 
 function ThirdPlacePage({
   standings,
