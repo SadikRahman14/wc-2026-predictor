@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import TournamentNav from "./components/TournamentNav";
-import GroupsPage from "./pages/GroupsPage.jsx";
-import ThirdPlacePage from "./pages/ThirdPlacePage.jsx";
-import BracketPage from "./pages/BracketPage.jsx";
-import LandingPage from "./pages/LandingPage.jsx";
-import SiteFooter from "./components/SiteFooter.jsx";
+import TournamentNav from "./Components/TournamentNav";
+import GroupsPage from "./Pages/GroupsPage.jsx";
+import ThirdPlacePage from "./Pages/ThirdPlacePage.jsx";
+import BracketPage from "./Pages/BracketPage.jsx";
+import LandingPage from "./Pages/LandingPage.jsx";
+import SiteFooter from "./Components/SiteFooter.jsx";
 import { groups } from "./data/groups.js";
 
 const STORAGE_KEY = "world-cup-2026-predictor-progress-v1";
