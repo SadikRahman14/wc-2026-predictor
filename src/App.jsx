@@ -6,6 +6,7 @@ import BracketPage from "./Pages/BracketPage.jsx";
 import LandingPage from "./Pages/LandingPage.jsx";
 import SiteFooter from "./Components/SiteFooter.jsx";
 import { groups } from "./data/groups.js";
+import { createRankedStandings } from "./Utils/groupUtils.js";
 
 const STORAGE_KEY = "world-cup-2026-predictor-progress-v1";
 
@@ -146,6 +147,7 @@ function App() {
 
     setActiveStep("groups");
   }
+  
 
   function goToThirdPlace() {
     if (!isGroupsComplete) return;
@@ -169,6 +171,32 @@ function App() {
     setActiveStep("bracket");
   }
 
+  function autoPickGroupsByRank() {
+    setActiveStep("groups");
+    setStandings(createRankedStandings());
+    setSelectedThirdIds([]);
+    setKnockoutWinners({});
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  function resetPrediction() {
+    localStorage.removeItem(STORAGE_KEY);
+
+    setActiveStep("groups");
+    setStandings(createInitialStandings());
+    setSelectedThirdIds([]);
+    setKnockoutWinners({});
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <main className="min-h-screen bg-[#050505] text-white">
       {isLanding ? (
@@ -180,15 +208,17 @@ function App() {
             onStepChange={handleStepChange}
             isGroupsComplete={isGroupsComplete}
             isThirdPlaceComplete={isThirdPlaceComplete}
+            onResetPrediction={resetPrediction}
           />
 
           <div className="min-h-screen">
             {activeStep === "groups" && (
               <GroupsPage
-                standings={standings}
-                setStandings={setStandings}
-                onGoToBracket={goToThirdPlace}
-              />
+  standings={standings}
+  setStandings={setStandings}
+  onGoToBracket={goToThirdPlace}
+  onAutoPickByRank={autoPickGroupsByRank}
+/>
             )}
 
             {activeStep === "third-place" && (

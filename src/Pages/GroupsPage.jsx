@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from "react";
 
+import GroupFormGuide from "../Components/groups/GroupFormGuide.jsx";
 import {
   closestCenter,
   DndContext,
@@ -24,10 +25,10 @@ import { groups } from "../data/groups.js";
 function GroupsPage({
   standings,
   setStandings,
-  onCompletionChange,
   onGoToBracket,
+  onAutoPickByRank,
 }) {
-  
+
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -54,9 +55,7 @@ function GroupsPage({
 
   const isGroupsComplete = completedGroupsCount === groups.length;
 
-  useEffect(() => {
-    onCompletionChange?.(isGroupsComplete);
-  }, [isGroupsComplete, onCompletionChange]);
+  
 
   function selectTeam(groupLetter, team) {
     setStandings((current) => {
@@ -148,17 +147,27 @@ function GroupsPage({
     <section className="bg-[#050505] px-4 py-8 text-white">
       <div className="mx-auto max-w-[1180px]">
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div>
+          <div>
             <p className="text-xs font-black uppercase tracking-[0.4em] text-yellow-400">
-            Step 1
+              Step 1
             </p>
 
             <h1 className="mt-3 text-4xl font-black uppercase leading-none tracking-wide md:text-6xl">
-            Groups
+              Groups
             </h1>
-        </div>
+          </div>
 
-        
+          <div className="flex flex-col items-start gap-3 md:items-end">
+           
+
+            <button
+              type="button"
+              onClick={onAutoPickByRank}
+              className="rounded-full bg-white/[0.06] px-5 py-2.5 text-xs font-black uppercase tracking-[0.2em] text-zinc-300 transition hover:bg-yellow-400 hover:text-black"
+            >
+              Auto Pick by Rank
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -177,14 +186,14 @@ function GroupsPage({
 
         <div className="mt-12 flex flex-col items-center justify-between gap-5 rounded-3xl border border-white/10 bg-white/[0.03] p-5 shadow-2xl shadow-black/30 md:flex-row">
           <div>
-           <div>
-            <p className="text-xs font-black uppercase tracking-[0.35em] text-yellow-400">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.35em] text-yellow-400">
                 Progress
-            </p>
+              </p>
 
-            <h2 className="mt-2 text-2xl font-black text-white">
+              <h2 className="mt-2 text-2xl font-black text-white">
                 {completedGroupsCount}/{groups.length} groups ready
-            </h2>
+              </h2>
             </div>
 
             <p className="mt-2 text-sm leading-6 text-zinc-400">
@@ -243,16 +252,14 @@ function GroupCard({
 
   return (
     <article className="rounded-2xl border border-white/10 bg-[#111111] p-4 shadow-2xl shadow-black/40 transition duration-300 hover:-translate-y-1 hover:border-yellow-400/40">
-      <header className="mb-4 flex items-center justify-between">
-        <div>
-          <h2 className="text-xl font-black tracking-tight text-white">
-            Group {group.letter}
-          </h2>
+      <header className="mb-4 flex items-center justify-between gap-3">
+        <h2 className="text-xl font-black text-white">Group {group.letter}</h2>
 
-          
+        <div className="flex items-center gap-2">
+
+
+          <GroupFormGuide group={group} />
         </div>
-
-        
       </header>
 
       <div className="mb-4 grid grid-cols-2 gap-2">
@@ -346,7 +353,7 @@ function SortableRankingRow({ groupLetter, team, position, onRemoveTeam }) {
   const shadeByPosition = {
     1: "bg-emerald-500/10 border-emerald-500/20",
     2: "bg-emerald-500/10 border-emerald-500/20",
-    3: "bg-yellow-400/10 border-yellow-400/20",
+    3: "bg-yellow-500/30 border-yellow-400/20",
     4: "bg-red-500/10 border-red-500/20",
   };
 
